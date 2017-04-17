@@ -1,6 +1,5 @@
 <html>
 	<script>
-
 		class LinkedList {
 			constructor() {
 				this.length = 0;
@@ -95,7 +94,6 @@
 			const listLength = findLinkedListLength(linkedList);
 			for (let i=0;i<=listLength-1;i++) {
 				let nodeValue = (linkedList._find(i)).value;
-				console.log(nodeValue);
 				newList.insert(0, nodeValue);
 			}
 			return newList;

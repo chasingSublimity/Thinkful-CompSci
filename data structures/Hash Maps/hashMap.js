@@ -81,3 +81,53 @@ class HashMap {
 
 HashMap.MAX_LOAD_RATIO = 0.9;
 HashMap.SIZE_RATIO = 3;
+
+// returns an object of character frequencies
+function getCharFreq(str) {
+	const charFreq = {};
+	for (let i=0;i<str.length;i++) {
+		// if the selected character is not in the object, 
+		// initialize it is a key with a value of zero
+		charFreq[str[i]] = charFreq[str[i]] || 0;
+		// increment frequency
+		charFreq[str[i]]++;
+	}
+	return charFreq;
+}
+
+function isPalindromePermutationPossible(str) {
+	let charFreq = getCharFreq(str);
+	let charFreqSum = 0;
+	// for each character, loop through and sum the remainder of 
+	// its frequency / 2. This counts the amount of non-doubled characters
+	for (let char in charFreq) {
+		charFreqSum += charFreq[char] % 2;
+	}
+	// palindromes cannot have more than one non-doubled character
+	return charFreqSum < 2;
+}
+
+function groupAnagrams(words) {
+	// alphabetically sorts the characters in each word 
+	// and maps them to an array ex: 'blake' would return 'abekl'.
+	// the array itself is then sorted alphapetically
+	const sortedWordsArray = (words.map(word => word.split('').sort().join(''))).sort();
+	let containerArray = [];
+	let previousWord;
+	let anagramArray = [];
+	sortedWordsArray.forEach(word => {
+		if (word === previousWord || !previousWord) {
+			anagramArray.push(word);
+		} else {
+			containerArray.push(anagramArray);
+			anagramArray = [word];
+		}
+		previousWord = word;
+	});
+	return containerArray;
+}
+
+
+
+isPalindromePermutationPossible(null);
+groupAnagrams(null);
